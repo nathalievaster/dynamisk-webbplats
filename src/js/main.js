@@ -34,4 +34,26 @@ button.addEventListener('click', () => {
     }, 500);
 });
 
+// Hämta datan med Fetch API
+document.addEventListener("DOMContentLoaded", async ()=> {
+    try {
+        const response = await fetch("https://studenter.miun.se/~mallar/dt211g/");
+        const data = await response.json();
+
+        const courses = data.filter(item => item.type === "kurs");
+        const programs = data.filter(item => item.type === "program");
+    }
+})
+
 // Stapeldiagram
+const ctx = document.getElementById('barChart');
+new Chart(ctx, {
+    type: bar,
+    data: {
+        labels: 
+        datasets: [{
+            label: "Antal sökande",
+            data: 
+        }]
+    },
+});
