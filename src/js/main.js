@@ -22,7 +22,7 @@ function toggleMenu() {
 }
 
 // Animation på knapp
-
+/*
 const button = document.getElementById('buttonAnimate');
 
 button.addEventListener('click', () => {
@@ -32,7 +32,7 @@ button.addEventListener('click', () => {
     setTimeout(() => {
         button.classList.remove('shake');
     }, 500);
-});
+}); */
 
 // Hämta datan med Fetch API
 window.onload = async () => {
