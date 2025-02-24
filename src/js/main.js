@@ -35,7 +35,7 @@ button.addEventListener('click', () => {
 });
 
 // Hämta datan med Fetch API
-document.addEventListener("DOMContentLoaded", async () => {
+window.onload = async () => {
     try {
         const response = await fetch("https://studenter.miun.se/~mallar/dt211g/");
         const data = await response.json();
@@ -60,7 +60,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     } catch (error) {
         console.error("Fel vid hämtning av data:", error);
     }
-});
+};
 
 // Stapeldiagram
 /*
