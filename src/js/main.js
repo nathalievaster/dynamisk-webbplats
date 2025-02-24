@@ -1,5 +1,5 @@
  "use strict"
-
+// Meny-knapp
 // Hämtar elementen
 let openButton = document.getElementById("open-menu");
 let closeButton = document.getElementById("close-menu");
@@ -33,3 +33,5 @@ button.addEventListener('click', () => {
         button.classList.remove('shake');
     }, 500);
 });
+
+// Stapeldiagram
