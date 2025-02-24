@@ -1,0 +1,79 @@
+@use '../abstracts/mixins' as *;
+@use '../abstracts/functions' as *;
+
+
+.grid-container {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: auto auto;
+    gap: 1.2em 0em;
+    margin-top: 2%;
+}
+
+.image-radjur {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    grid-column: 2;
+    grid-row: 1;
+}
+
+.index-text {
+    padding: 5em;
+    line-height: 1.8em;
+    font-weight: bolder;
+}
+
+.card {
+    max-width: 350px;
+    @include card(var(--background-color)); 
+    @include hover-effect("scale");
+
+    img {
+        width: 80%;
+        height: auto;
+        border-top-left-radius: 10px;
+        border-top-right-radius: 10px;
+    }
+
+    h3 {
+        margin: 1em 0 0.5em;
+        font-size: 1.5em;
+    }
+
+    p {
+        padding: 0 1em;
+        font-size: 1em;
+    }
+}
+
+@media screen and (max-width: 950px){
+    .grid-container {
+        display: grid;
+        grid-template-columns: 1fr;
+    }
+    .index-text {
+        max-width: 550px;
+    }
+    .card {
+        max-width: 300px;
+        }
+        .card-container {
+            gap: 0em;
+            margin: 4em 0em;
+        }
+}
+@media screen and (max-width: 900px){
+    .card-container {
+        display: grid;
+        grid-template-columns: 1fr;
+    }
+    .card {
+        max-width: 80%;
+        margin: 2em 0em auto;
+        margin-left: 4em;
+
+    }
+    }
+
+    

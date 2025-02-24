@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="sv">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Moment 1 - Frontend-baserad webbutveckling</title>
+        <!-- Lightbox2 CSS -->
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.11.3/css/lightbox.min.css">
+    <link rel="stylesheet" href="sass/main.scss">
+    <script src="js/main.js" type="module"></script>
+</head>
+
+<body>
+    <header>
+        <h1><a href="index.html">Moment 2</a></h1>
+        <!-- Menyknapp för att öppna meny på mobila enheter -->
+        <button class="menu-btn open" id="open-menu">
+            <span class="menu-icon">
+                <span class="bars"></span>
+                <span class="bars"></span>
+                <span class="bars"></span>
+            </span>
+            <span class="menu-text">Meny</span>
+        </button>
+        <!-- Navigeringsmeny -->
+        <nav id="nav-menu">
+            <!-- Menyknapp för att stänga menyn på mobila enheter -->
+            <button class="menu-btn close" id="close-menu">
+                <span class="menu-icon">
+                    <span class="bars cross1"></span>
+                    <span class="bars cross2"></span>
+                </span>
+                <span class="menu-text">Stäng meny</span>
+            </button>
+            <ul>
+                <li><a href="index.html">Startsida</a></li>
+                <li><a href="sass.html">SASS</a></li>
+                <li><a href="pictures.html" class="active">Bilder</a></li>
+                <li><a href="animation.html">Animation</a></li>
+                <li>#</li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <h1>Bilder från Högsäter</h1>
+
+        <section>
+            <h2>Bildgalleri</h2>
+            <div class="gallery">
+                <a href="images/badplats.jpg" data-lightbox="gallery" data-title="Högsäters badplats">
+                    <picture>
+                        <source srcset="images/badplats.jpg?as=avif" type="image/avif">
+                        <source srcset="images/badplats.jpg?as=webp" type="image/webp">
+                        <img src="images/badplats.jpg" alt="Vy över en sjö med ett träd i förgrund och brygga i bakgrund">
+                    </picture>
+                </a>
+                <a href="images/hastdimma.jpg" data-lightbox="gallery" data-title="Häst i dimma">
+                    <picture>
+                        <source srcset="images/hastdimma.jpg?as=avif" type="image/avif">
+                        <source srcset="images/hastdimma.jpg?as=webp" type="image/webp">
+                        <img src="images/hastdimma.jpg" alt="Siluett av en häst syns i bakgrund i höstlig miljö">
+                    </picture>
+                </a>
+                <a href="images/hastpuss.jpg" data-lightbox="gallery" data-title="Hästar som pussas">
+                    <picture>
+                        <source srcset="images/hastpuss.jpg?as=avif" type="image/avif">
+                        <source srcset="images/hastpuss.jpg?as=webp" type="image/webp">
+                        <img src="images/hastpuss.jpg" alt="Två hästar står med sina mular mot varandra">
+                    </picture>
+                </a>
+                <a href="images/naturreservat.jpg" data-lightbox="gallery" data-title="Högsäters naturreservat">
+                    <picture>
+                        <source srcset="images/naturreservat.jpg?as=avif" type="image/avif">
+                        <source srcset="images/naturreservat.jpg?as=webp" type="image/webp">
+                        <img src="images/naturreservat.jpg" alt="Vy över sjökant med skog" loading="lazy">
+                    </picture>
+                </a>
+                <a href="images/ragnerud.jpg" data-lightbox="gallery" data-title="Ragnerudssjön">
+                    <picture>
+                        <source srcset="images/ragnerud.jpg?as=avif" type="image/avif">
+                        <source srcset="images/ragnerud.jpg?as=webp" type="image/webp">
+                        <img src="images/ragnerud.jpg" alt="Vy över sjökant med skog" loading="lazy">
+                    </picture>
+                </a>
+                <a href="images/tradtoppar.jpg" data-lightbox="gallery" data-title="Snöiga trädtoppar">
+                    <picture>
+                        <source srcset="images/tradtoppar.jpg?as=avif" type="image/avif">
+                        <source srcset="images/tradtoppar.jpg?as=webp" type="image/webp">
+                        <img src="images/tradtoppar.jpg" alt="Snöiga grantoppar mot blå himmel" loading="lazy">
+                    </picture>
+                </a>
+            </div>
+        </section>
+
+
+    </main>
+    <footer>
+        <p>Nathalie Fredriksson</p>
+        <p>Mittuniversitetet</p>
+    </footer>
+
+
+</body>
+
+</html>

@@ -1,0 +1,18 @@
+@mixin hover-effect($effect) {
+    transition: all 0.3s ease-in-out;
+
+    @if $effect == "scale" {
+        &:hover {
+            transform: scale(1.05);
+        }
+    } @else if $effect == "background" {
+        &:hover {
+            background-color: var(--secondary-color);
+            border-radius: 4px;
+        }
+    } @else {
+        &:hover {
+            // Ingen effekt
+        }
+    }
+}

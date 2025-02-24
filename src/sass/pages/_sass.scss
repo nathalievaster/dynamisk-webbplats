@@ -1,0 +1,10 @@
+@use "index" as *;
+
+.sass-text {
+    @extend .index-text;
+    max-width: 75ch;
+    margin: 0 auto;
+    h2{
+        text-align: center;
+    }
+}

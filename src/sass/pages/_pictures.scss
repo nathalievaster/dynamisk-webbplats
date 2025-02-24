@@ -1,0 +1,39 @@
+.gallery {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 0.5em;
+    padding: 2em;
+    justify-content: center;
+    margin: 2em 4em auto;
+
+    a {
+        display: block;
+        border-radius: 10px;
+        overflow: hidden;
+        transition: transform 0.3s ease-in-out;
+
+        img {
+            width: 80%;
+            height: auto;
+            display: block;
+            border-radius: 10px;
+        }
+
+        &:hover {
+            transform: scale(1.05);
+        }
+    }
+}
+
+@media screen and (max-width: 900px) {
+    .gallery {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media screen and (max-width: 600px) {
+    .gallery {
+        grid-template-columns: 1fr;
+    }
+}
+

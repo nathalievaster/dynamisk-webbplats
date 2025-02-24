@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="sv">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Moment 1 - Frontend-baserad webbutveckling</title>
+    <link rel="stylesheet" href="sass/main.scss">
+    <script src="js/main.js" type="module"></script>
+</head>
+
+<body>
+    <header>
+        <h1><a href="index.html">Moment 2</a></h1>
+        <!-- Menyknapp för att öppna meny på mobila enheter -->
+        <button class="menu-btn open" id="open-menu">
+            <span class="menu-icon">
+                <span class="bars"></span>
+                <span class="bars"></span>
+                <span class="bars"></span>
+            </span>
+            <span class="menu-text">Meny</span>
+        </button>
+        <!-- Navigeringsmeny -->
+        <nav id="nav-menu">
+            <!-- Menyknapp för att stänga menyn på mobila enheter -->
+            <button class="menu-btn close" id="close-menu">
+                <span class="menu-icon">
+                    <span class="bars cross1"></span>
+                    <span class="bars cross2"></span>
+                </span>
+                <span class="menu-text">Stäng meny</span>
+            </button>
+            <ul>
+                <li><a href="index.html">Startsida</a></li>
+                <li><a href="sass.html" class="active">SASS</a></li>
+                <li><a href="pictures.html">Bilder</a></li>
+                <li><a href="animation.html">Animation</a></li>
+                <li>#</li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <h1>Arbetet med SASS</h1>
+
+        <section class="sass-text">
+            <h2>Att komma igång</h2>
+            <p>Precis som Malin Larsson sa, var tröskeln låg vad gällde att komma igång med SASS. Mycket lätt med tanke
+                på att det i grund och botten bara är att skriva CSS som vi nu är vana vid - fast med fler funktioner.
+                Det som är ovant är att ha sin CSS i olika mappar och filer - även om det underlättar enormt. Jag valde
+                att testa från början med 7:1 strukturen, för att sen plocka bort de mappar jag märkte inte var 
+                nödvändiga. Vissa kanske upplever det vara lättare att göra tvärtom, att istället bygga på allteftersom man
+                märker att fler mappar behövs, men för mig fungerade detta bra.
+            </p>
+            <p>Jag tror dock att i små projekt som detta fungerar den vanliga CSSen utan partials bättre - eller så är det
+                helt enkelt bara ovanan. Ett annat problem jag upplevde med SASS var den måste kompileras till CSS för att
+                kunna användas i webbläsaren. Jag tror det är detta som orsakar att min live-server kraschar titt som 
+                tätt. Jag kan inte heller välja att visa sidan utan live-server i och med att webbläsaren inte kan förstå
+                SASS utan kompilering. Jag testade att köra <code>npm run start -- --no-hmr</code> vilket stänger av Hot Module 
+                Replacement (HMR), vilket normalt uppdaterar delar av koden utan att ladda om hela sidan. Det fungerade
+                till viss del - men var jag för långsam på fingrarna när jag kodade kraschade allt och jag fick göra ny
+                <code>npm run start</code>.
+            </p>
+            <p>Det jag tyckte var absolut bäst var att kunna lagra färger i variabler. Det har hänt mer ofta än sällan
+                att jag behövt sitta och skrolla igenom kod på 1000 rader för att ändra färger här och där när jag insett
+                att det inte blivit som jag tänkt mig. Att ha allt samlat på ett ställe underlättade enormt. Att kunna 
+                använda darken och lighten var också väldigt bekvämt!
+            </p>
+            <p>Jag funderade länge på hur jag skulle få in if/else-satser i och med att jag valde media querys till 
+                färgschema. Jag tyckte lösningen blev rätt fiffig, och kan ju sedan lätt återanvändas till framtida 
+                projekt. Ska denna sidan utökas i kommande projekt, kan den ju appliceras på andra knappar och länkar.
+            </p>
+            <p>Jag har i terminalen fått varningar om att darken och lighten funktionaliteten är föråldrad och ska 
+                ersättas med color.adjust istället. Jag har ignorerat detta då vi på föreläsningen blev lärda att 
+                använda darken och lighten.
+            </p>
+        </section>
+
+    </main>
+    <footer>
+        <p>Nathalie Fredriksson</p>
+        <p>Mittuniversitetet</p>
+    </footer>
+
+
+</body>
+
+</html>

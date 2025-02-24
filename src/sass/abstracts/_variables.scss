@@ -1,0 +1,35 @@
+@use "sass:color";
+
+// Ljust tema
+$primary-light: #CAE0BC; 
+$secondary-light: #6E8E59; 
+$accent-light: color.complement($secondary-light); 
+$text-light: #000000; 
+$background-light: #ddebdd;  
+
+// Darken färger för mörkt tema
+$primary-dark: darken($primary-light, 15%); 
+$secondary-dark: darken($secondary-light, 20%); 
+$accent-dark: darken($accent-light, 25%); 
+$text-dark: lighten($text-light, 30%);  // ljusare text för mörk bakgrund
+$background-dark: darken($background-light, 30%); 
+
+// CSS-variabler (standard: ljust tema)
+:root {
+    --primary-color: #{$primary-light};
+    --secondary-color: #{$secondary-light};
+    --accent-color: #{$accent-light};
+    --text-color: #{$text-light};
+    --background-color: #{$background-light};
+}
+
+// Dark Mode – Används om systemet föredrar mörkt läge
+@media (prefers-color-scheme: dark) {
+    :root {
+        --primary-color: #{$primary-dark};
+        --secondary-color: #{$secondary-dark};
+        --accent-color: #{$accent-dark};
+        --text-color: #{$text-dark};
+        --background-color: #{$background-dark};
+    }
+}

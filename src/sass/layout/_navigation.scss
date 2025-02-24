@@ -1,0 +1,23 @@
+@use '../abstracts/functions' as *;
+
+nav {
+    ul {
+        margin-right: 1.6em;
+        font-size: 1.2em;
+        display: flex;
+        /* Gör listan horisontell */
+    }
+
+    li {
+        margin-right: 1.6em;
+    }
+
+    a {
+        color: var(--text-color);
+        font-weight: bold;
+        /* Gör texten fetare */
+        padding: 5px 10px;
+        /* Bättre klickvänlighet */
+        @include hover-effect("background");
+    }
+}
