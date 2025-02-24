@@ -35,25 +35,43 @@ button.addEventListener('click', () => {
 });
 
 // Hämta datan med Fetch API
-document.addEventListener("DOMContentLoaded", async ()=> {
+document.addEventListener("DOMContentLoaded", async () => {
     try {
         const response = await fetch("https://studenter.miun.se/~mallar/dt211g/");
         const data = await response.json();
 
-        const courses = data.filter(item => item.type === "kurs");
-        const programs = data.filter(item => item.type === "program");
+        // Lagrar program och kurser i varsina variabler
+        const courses = data.filter(item => item.type === "Kurs");
+        const programs = data.filter(item => item.type === "Program");
+
+        // Plockar ut de 6 mest sökta kurserna
+        const topCourses = courses
+            .sort((a, b) => b.applicantsTotal - a.applicantsTotal)
+            .slice(0, 6);
+
+        console.log("Topp 6 kurser:", topCourses);
+
+        // Plockar ut de 5 mest sökta programmen
+        const topPrograms = programs
+            .sort((a, b) => b.applicantsTotal - a.applicantsTotal)
+            .slice(0, 5);
+
+        console.log("Topp 5 program:", topPrograms);
+    } catch (error) {
+        console.error("Fel vid hämtning av data:", error);
     }
-})
+});
 
 // Stapeldiagram
+/*
 const ctx = document.getElementById('barChart');
 new Chart(ctx, {
     type: bar,
     data: {
         labels: 
-        datasets: [{
+        datasets, [{
             label: "Antal sökande",
             data: 
         }]
     },
-});
+}); */
