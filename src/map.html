@@ -4,14 +4,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Naturnära liv</title>
+    <title>Moment 1 - Frontend-baserad webbutveckling</title>
     <link rel="stylesheet" href="sass/main.scss">
     <script src="js/main.js" type="module"></script>
 </head>
 
 <body>
     <header>
-        <h1><a href="index.html">Naturnära liv</a></h1>
+        <h1><a href="index.html">Moment 2</a></h1>
         <!-- Menyknapp för att öppna meny på mobila enheter -->
         <button class="menu-btn open" id="open-menu">
             <span class="menu-icon">
@@ -33,29 +33,16 @@
             </button>
             <ul>
                 <li><a href="index.html">Startsida</a></li>
-                <li><a href="sass.html">SASS</a></li>
+                <li><a href="sass.html" class="active">SASS</a></li>
                 <li><a href="pictures.html">Bilder</a></li>
-                <li><a href="animation.html" class="active">Animation</a></li>
+                <li><a href="animation.html">Animation</a></li>
                 <li><a href="diagram.html">Diagram</a></li>
-                <li><a href="map.html">Karta</a></li>
+                <li><a href="map.html" class="active">Karta</a></li>
             </ul>
         </nav>
     </header>
 
     <main>
-        <h1 id="movingTitle">Animationer</h1>
-        <div id="pictureAnimation">
-            <picture>
-                <source srcset="images/kiralov.jpg?as=webp" type="image/webp">
-                <img id="kiraLov" src="images/kiralov.jpg" alt="Brun cockerspaniel bland höstlöv">
-            </picture>
-
-            <div id="overlay"></div>
-
-        </div>
-        <div id="buttonContainer">
-            <button id="buttonAnimate">Klicka på mig!</button>
-        </div>
 
     </main>
     <footer>
