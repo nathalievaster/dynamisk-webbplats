@@ -70,7 +70,7 @@ const ctx = document.getElementById('barChart').getContext("2d");
 new Chart(ctx, {
     type: "bar",
     options: {
-        animation: false
+        responsive: true,
     },
     data: {
         labels: topCourses.map (course => course.name),
