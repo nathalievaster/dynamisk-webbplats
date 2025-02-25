@@ -1,4 +1,5 @@
  "use strict"
+ import Chart from "chart.js/auto";
 // Meny-knapp
 // Hämtar elementen
 let openButton = document.getElementById("open-menu");
@@ -50,6 +51,7 @@ window.onload = async () => {
             .slice(0, 6);
 
         console.log("Topp 6 kurser:", topCourses);
+        createBarChart(topCourses);
 
         // Plockar ut de 5 mest sökta programmen
         const topPrograms = programs
@@ -63,15 +65,19 @@ window.onload = async () => {
 };
 
 // Stapeldiagram
-/*
-const ctx = document.getElementById('barChart');
+function createBarChart (topCourses){
+const ctx = document.getElementById('barChart').getContext("2d");
 new Chart(ctx, {
-    type: bar,
+    type: "bar",
+    options: {
+        animation: false
+    },
     data: {
-        labels: 
-        datasets, [{
+        labels: topCourses.map (course => course.name),
+        datasets: [{
             label: "Antal sökande",
-            data: 
+            data: topCourses.map(course => parseInt(course.applicantsTotal, 10))
         }]
     },
-}); */
+}); 
+}
