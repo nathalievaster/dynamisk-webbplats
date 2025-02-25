@@ -59,6 +59,8 @@ window.onload = async () => {
             .slice(0, 5);
 
         console.log("Topp 5 program:", topPrograms);
+        createPieChart(topPrograms);
+
     } catch (error) {
         console.error("Fel vid hämtning av data:", error);
     }
@@ -66,7 +68,7 @@ window.onload = async () => {
 
 // Stapeldiagram
 function createBarChart (topCourses){
-const ctx = document.getElementById('barChart').getContext("2d");
+const ctx = document.getElementById('barChart');
 new Chart(ctx, {
     type: "bar",
     options: {
@@ -80,4 +82,22 @@ new Chart(ctx, {
         }]
     },
 }); 
+}
+
+//Cirkeldiagrammet
+function createPieChart (topPrograms){
+    const ctx = document.getElementById('pieChart');
+    new Chart (ctx, {
+        type: "pie",
+        options: {
+            responsive: true,
+        },
+        data: {
+            labels: topPrograms.map (program => program.name),
+            datasets: [{
+                label: "Antal sökande",
+                data: topPrograms.map(program => parseInt(program.applicantsTotal, 10))
+            }]
+        }
+    });
 }
