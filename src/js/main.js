@@ -132,9 +132,12 @@ document.addEventListener("DOMContentLoaded", () => {
                 let lat = parseFloat(data[0].lat);
                 let lon = parseFloat(data[0].lon);
 
+                // Använder bbox för att zooma in på platsen med lite marginal runt
+                let bboxMargin = 0.02;
+                let bbox = `${lon - bboxMargin},${lat - bboxMargin},${lon + bboxMargin},${lat + bboxMargin}`;
 
                 // Uppdatera iframe med den nya platsen
-                mapFrame.src = `https://www.openstreetmap.org/export/embed.html?marker=${lat},${lon}`;
+                mapFrame.src = `https://www.openstreetmap.org/export/embed.html?bbox=${bbox}&layer=mapnik&marker=${lat},${lon}`;
             })
             .catch(error => console.error("Fel vid API-anrop:", error));
     }
