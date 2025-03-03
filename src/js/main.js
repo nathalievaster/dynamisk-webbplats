@@ -119,3 +119,25 @@ document.addEventListener("DOMContentLoaded", () => {
             return;
         }
 
+        // API-anrop till Nominatim för att få koordinater
+        fetch(`https://nominatim.openstreetmap.org/search?format=json&q=${encodeURIComponent(location)}`)
+            .then(response => response.json())
+            .then(data => {
+                if (data.length === 0) {
+                    alert("Platsen hittades inte!");
+                    return;
+                }
+
+                //Konverterar värdena från strängar till decimaltal
+                let lat = parseFloat(data[0].lat);
+                let lon = parseFloat(data[0].lon);
+
+
+                // Uppdatera iframe med den nya platsen
+                mapFrame.src = `https://www.openstreetmap.org/export/embed.html?marker=${lat},${lon}`;
+            })
+            .catch(error => console.error("Fel vid API-anrop:", error));
+    }
+
+    searchButton.addEventListener("click", searchLocation);
+});
