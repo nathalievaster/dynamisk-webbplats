@@ -41,20 +41,45 @@ button.addEventListener('click', () => {
  * och skapar grafiska visualiseringar för de mest populära kurserna och programmen.
  * 
  * @async
- * @function window.onload
+ * @function fetchData
  * @throws {Error} Om API-anropet misslyckas eller om data inte går att bearbeta
  */
-window.onload = async () => {
+async function fetchData() {
     try {
-        // Hämtar data från API
+        /**
+         * API-anrop till MIUN:s server för att hämta kurs- och programdata.
+         * @constant {Response} response - HTTP-svar från servern.
+         */
         const response = await fetch("https://studenter.miun.se/~mallar/dt211g/");
+        
+        /**
+         * Omvandlar JSON-svaret till JavaScript-objekt.
+         * @constant {Array} data - Array med kurs- och programobjekt.
+         */
         const data = await response.json();
 
-        // Lagrar program och kurser i varsina variabler
+        // Kontrollera om data finns
+        if (!Array.isArray(data) || data.length === 0) {
+            throw new Error("Ingen data hittades.");
+        }
+
+        /**
+         * Filtrerar ut kurser från den hämtade datan.
+         * @constant {Array} courses - Lista över alla kurser.
+         */
         const courses = data.filter(item => item.type === "Kurs");
+
+        /**
+         * Filtrerar ut program från den hämtade datan.
+         * @constant {Array} programs - Lista över alla program.
+         */
         const programs = data.filter(item => item.type === "Program");
 
-        // Plockar ut de 6 mest sökta kurserna
+        /**
+         * Plockar ut de 6 mest sökta kurserna.
+         * Sorterar först kurser efter antal sökande i fallande ordning.
+         * @constant {Array} topCourses - Lista med de 6 mest populära kurserna.
+         */
         const topCourses = courses
             .sort((a, b) => b.applicantsTotal - a.applicantsTotal)
             .slice(0, 6);
@@ -62,7 +87,11 @@ window.onload = async () => {
         console.log("Topp 6 kurser:", topCourses);
         createBarChart(topCourses);
 
-        // Plockar ut de 5 mest sökta programmen
+        /**
+         * Plockar ut de 5 mest sökta programmen.
+         * Sorterar först program efter antal sökande i fallande ordning.
+         * @constant {Array} topPrograms - Lista med de 5 mest populära programmen.
+         */
         const topPrograms = programs
             .sort((a, b) => b.applicantsTotal - a.applicantsTotal)
             .slice(0, 5);
@@ -73,7 +102,7 @@ window.onload = async () => {
     } catch (error) {
         console.error("Fel vid hämtning av data:", error);
     }
-};
+}
 
 /**
  * Skapar ett stapeldiagram för de mest populära kurserna.
@@ -83,11 +112,25 @@ window.onload = async () => {
  * @returns {void}
  */
 function createBarChart(topCourses) {
+    /**
+     * Hämtar canvas-elementet där diagrammet ska ritas upp.
+     * @constant {HTMLElement} ctx - Canvas för diagrammet.
+     */
     const ctx = document.getElementById('barChart');
+
+     /**
+     * Initialiserar och konfigurerar stapeldiagrammet med Chart.js.
+     * Definierar etiketter och datasets.
+     */
     new Chart(ctx, {
         type: "bar",
         options: {
             responsive: true,
+            plugins: {
+                legend: {
+                    display: false
+                }
+            }
         },
         data: {
             labels: topCourses.map(course => course.name),
@@ -107,11 +150,20 @@ function createBarChart(topCourses) {
  * @returns {void}
  */
 function createPieChart(topPrograms) {
+    /**
+     * Hämtar canvas-elementet där cirkeldiagrammet ska ritas upp.
+     * @constant {HTMLElement} ctx - Canvas för cirkeldiagrammet.
+     */
     const ctx = document.getElementById('pieChart');
+
+    /**
+     * Initialiserar och konfigurerar cirkeldiagrammet med Chart.js.
+     * Definierar etiketter och dataset.
+     */
     new Chart(ctx, {
         type: "pie",
         options: {
-            responsive: true,
+            responsive: true
         },
         data: {
             labels: topPrograms.map(program => program.name),
@@ -123,12 +175,32 @@ function createPieChart(topPrograms) {
     });
 }
 
+/**
+ * När sidan har laddats färdigt anropas `fetchData` för att hämta och visa data.
+ * 
+ * @event window.onload
+ */
+window.onload = fetchData;
+
 // KARTA
 
 document.addEventListener("DOMContentLoaded", () => {
-    // Hämta knappen och inputfältet när dokumentet är fullständigt inläst
+    /**
+     * Knapp för att söka efter en plats.
+     * @constant {HTMLElement} searchButton
+     */
     const searchButton = document.getElementById("searchLocation");
+
+    /**
+     * Inputfält där användaren skriver in en plats.
+     * @constant {HTMLInputElement} locationInput
+     */
     const locationInput = document.getElementById("locationInput");
+
+    /**
+     * iFrame-element där kartan visas och uppdateras dynamiskt.
+     * @constant {HTMLIFrameElement} mapFrame
+     */
     const mapFrame = document.getElementById("mapFrame");
 
     /**
@@ -136,10 +208,15 @@ document.addEventListener("DOMContentLoaded", () => {
      * Hämtar koordinater för den angivna platsen via Nominatim API och uppdaterar en inbäddad karta.
      *
      * @function searchLocation
-     * @throws {Error} Om API-anropet misslyckas eller platsen inte hittas
+     * @throws {Error} Om API-anropet misslyckas eller platsen inte hittas.
      */
     function searchLocation() {
-        let location = locationInput.value.trim(); // Tar bort onödiga mellanslag eller liknande
+        /**
+         * Hämtar platsen som användaren angett i inputfältet.
+         * Tar bort eventuella extra mellanslag i början/slutet.
+         * @type {string}
+         */
+        let location = locationInput.value.trim(); 
 
         // Om inputfältet är tomt, visa en alert
         if (!location) { 
@@ -148,8 +225,8 @@ document.addEventListener("DOMContentLoaded", () => {
         }
 
         /**
-         * Gör ett API-anrop till Nominatim för att hämta koordinater baserat på platsnamnet
-         * och uppdaterar sedan kartan.
+         * API-anrop till Nominatim för att hämta koordinater baserat på platsnamnet.
+         * Använder encodeURIComponent() för att säkerställa att platsnamn kodas korrekt.
          */
         fetch(`https://nominatim.openstreetmap.org/search?format=json&q=${encodeURIComponent(location)}`)
             .then(response => response.json())
@@ -160,12 +237,29 @@ document.addEventListener("DOMContentLoaded", () => {
                     return;
                 }
 
-                // Konvertera latitud och longitud till flyttal (decimaltal)
+                /**
+                 * Latitude-koordinat för den hittade platsen.
+                 * @type {number}
+                 */
                 let lat = parseFloat(data[0].lat);
+
+                /**
+                 * Longitude-koordinat för den hittade platsen.
+                 * @type {number}
+                 */
                 let lon = parseFloat(data[0].lon);
 
-                // Definiera en bbox (bounding box) för att visa lite extra utrymme runt platsen
+                /**
+                 * Marginal för bounding boxen (visningsområdet runt platsen).
+                 * @constant {number} bboxMargin
+                 */
                 let bboxMargin = 0.02;
+
+                /**
+                 * Bounding box för att definiera kartans synliga område.
+                 * Ger en liten marginal runt den valda platsen.
+                 * @type {string}
+                 */
                 let bbox = `${lon - bboxMargin},${lat - bboxMargin},${lon + bboxMargin},${lat + bboxMargin}`;
 
                 // Uppdatera iframe med den nya platsen och marker för platsen
@@ -179,7 +273,8 @@ document.addEventListener("DOMContentLoaded", () => {
     /**
      * Händelsehanterare som lyssnar på knappklick och anropar searchLocation.
      * 
-     * @listens {click} #searchLocation
+     * @event click
+     * @listens {HTMLElement#searchLocation}
      */
     searchButton.addEventListener("click", searchLocation);
 });
