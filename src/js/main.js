@@ -106,41 +106,60 @@ function createPieChart(topPrograms) {
 // KARTA
 
 document.addEventListener("DOMContentLoaded", () => {
-    // Hämta knappen och inputfältet
+    // Hämta knappen och inputfältet när dokumentet är fullständigt inläst
     const searchButton = document.getElementById("searchLocation");
     const locationInput = document.getElementById("locationInput");
     const mapFrame = document.getElementById("mapFrame");
 
-
+    /**
+     * Funktion som körs när användaren söker efter en plats.
+     * Hämtar koordinater för den angivna platsen via Nominatim API och uppdaterar en inbäddad karta.
+     *
+     * @function searchLocation
+     * @throws {Error} Om API-anropet misslyckas eller platsen inte hittas
+     */
     function searchLocation() {
         let location = locationInput.value.trim(); // Tar bort onödiga mellanslag eller liknande
-        if (!location) { // Om inputfältet är tomt
+
+        // Om inputfältet är tomt, visa en alert
+        if (!location) { 
             alert("Ange en plats!");
             return;
         }
 
-        // API-anrop till Nominatim för att få koordinater
+        /**
+         * Gör ett API-anrop till Nominatim för att hämta koordinater baserat på platsnamnet
+         * och uppdaterar sedan kartan.
+         */
         fetch(`https://nominatim.openstreetmap.org/search?format=json&q=${encodeURIComponent(location)}`)
             .then(response => response.json())
             .then(data => {
+                // Om inga resultat hittades, visa en alert
                 if (data.length === 0) {
                     alert("Platsen hittades inte!");
                     return;
                 }
 
-                //Konverterar värdena från strängar till decimaltal
+                // Konvertera latitud och longitud till flyttal (decimaltal)
                 let lat = parseFloat(data[0].lat);
                 let lon = parseFloat(data[0].lon);
 
-                // Använder bbox för att zooma in på platsen med lite marginal runt
+                // Definiera en bbox (bounding box) för att visa lite extra utrymme runt platsen
                 let bboxMargin = 0.02;
                 let bbox = `${lon - bboxMargin},${lat - bboxMargin},${lon + bboxMargin},${lat + bboxMargin}`;
 
-                // Uppdatera iframe med den nya platsen
+                // Uppdatera iframe med den nya platsen och marker för platsen
                 mapFrame.src = `https://www.openstreetmap.org/export/embed.html?bbox=${bbox}&layer=mapnik&marker=${lat},${lon}`;
             })
-            .catch(error => console.error("Fel vid API-anrop:", error));
+            .catch(error => {
+                console.error("Fel vid API-anrop:", error);
+            });
     }
 
+    /**
+     * Händelsehanterare som lyssnar på knappklick och anropar searchLocation.
+     * 
+     * @listens {click} #searchLocation
+     */
     searchButton.addEventListener("click", searchLocation);
 });
