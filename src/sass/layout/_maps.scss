@@ -1,0 +1,39 @@
+#mapContainer {
+    width: 100%;
+    height: 500px;
+    margin-bottom: 1em;
+}
+#mapFrame {
+    width: 100%;
+    height: 100%;
+}
+
+#locationInput {
+    width: 300px;
+    padding: 8px;
+    font-size: 16px;
+    border: 2px solid #ccc;
+    border-radius: 5px;
+    outline: none;
+    transition: border-color 0.3s ease-in-out;
+    margin: 1em auto;
+}
+
+#locationInput:focus {
+    border-color: #000000;
+}
+
+#searchLocation {
+    padding: 10px 20px;
+    font-size: 16px;
+    color: white;
+    background-color: var(--accent-color);
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease-in-out, transform 0.1s ease-in-out;
+}
+
+#searchLocation:hover {
+    background-color: color-mix(in srgb, var(--accent-color) 80%, black 20%);
+}

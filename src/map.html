@@ -7,6 +7,7 @@
     <title>Moment 1 - Frontend-baserad webbutveckling</title>
     <link rel="stylesheet" href="sass/main.scss">
     <script src="js/main.js" type="module"></script>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
 </head>
 
 <body>
@@ -49,7 +50,10 @@
         <input type="text" id="locationInput" placeholder="Skriv en plats...">
         <button id="searchLocation">Sök</button>
 
-        <div id="map"></div>
+   
+        <div id="mapContainer">
+            <iframe id="mapFrame" src="https://www.openstreetmap.org/export/embed.html?bbox=18.06,59.32,18.08,59.34&layer=mapnik" allowfullscreen></iframe>
+        </div>
 
     </main>
     <footer>

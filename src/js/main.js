@@ -1,5 +1,5 @@
- "use strict"
- import Chart from "chart.js/auto";
+"use strict"
+import Chart from "chart.js/auto";
 // Meny-knapp
 // Hämtar elementen
 let openButton = document.getElementById("open-menu");
@@ -33,7 +33,7 @@ button.addEventListener('click', () => {
     setTimeout(() => {
         button.classList.remove('shake');
     }, 500);
-}); */
+}); 
 
 // Hämta datan med Fetch API
 window.onload = async () => {
@@ -66,34 +66,35 @@ window.onload = async () => {
     }
 };
 
+
 // Stapeldiagram
-function createBarChart (topCourses){
-const ctx = document.getElementById('barChart');
-new Chart(ctx, {
-    type: "bar",
-    options: {
-        responsive: true,
-    },
-    data: {
-        labels: topCourses.map (course => course.name),
-        datasets: [{
-            label: "Antal sökande",
-            data: topCourses.map(course => parseInt(course.applicantsTotal, 10))
-        }]
-    },
-}); 
+function createBarChart(topCourses) {
+    const ctx = document.getElementById('barChart');
+    new Chart(ctx, {
+        type: "bar",
+        options: {
+            responsive: true,
+        },
+        data: {
+            labels: topCourses.map(course => course.name),
+            datasets: [{
+                label: "Antal sökande",
+                data: topCourses.map(course => parseInt(course.applicantsTotal, 10))
+            }]
+        },
+    });
 }
 
 //Cirkeldiagrammet
-function createPieChart (topPrograms){
+function createPieChart(topPrograms) {
     const ctx = document.getElementById('pieChart');
-    new Chart (ctx, {
+    new Chart(ctx, {
         type: "pie",
         options: {
             responsive: true,
         },
         data: {
-            labels: topPrograms.map (program => program.name),
+            labels: topPrograms.map(program => program.name),
             datasets: [{
                 label: "Antal sökande",
                 data: topPrograms.map(program => parseInt(program.applicantsTotal, 10))
@@ -101,3 +102,20 @@ function createPieChart (topPrograms){
         }
     });
 }
+*/
+// KARTA
+
+document.addEventListener("DOMContentLoaded", () => {
+    // Hämta knappen och inputfältet
+    const searchButton = document.getElementById("searchLocation");
+    const locationInput = document.getElementById("locationInput");
+    const mapFrame = document.getElementById("mapFrame");
+
+
+    function searchLocation() {
+        let location = locationInput.value.trim(); // Tar bort onödiga mellanslag eller liknande
+        if (!location) { // Om inputfältet är tomt
+            alert("Ange en plats!");
+            return;
+        }
+
