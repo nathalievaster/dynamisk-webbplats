@@ -1,0 +1,30 @@
+#diagram-page {
+    text-align: center;
+    padding: 20px;
+}
+
+canvas {
+    max-width: 90%;
+    height: auto;
+    margin: 20px auto;
+    display: block;
+}
+
+/* Specifik justering för stapeldiagrammet */
+#barChart {
+    max-width: 600px;
+}
+
+/* Specifik justering för cirkeldiagrammet */
+#pieChart {
+    max-width: 400px; 
+}
+
+@media (max-width: 600px) {
+    #barChart {
+        max-width: 100%; /* Låter diagrammet ta hela bredden */
+    }
+    #pieChart {
+        max-width: 300px; /* Gör cirkeldiagrammet ännu mindre på små skärmar */
+    }
+}
