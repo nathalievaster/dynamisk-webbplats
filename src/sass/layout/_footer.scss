@@ -4,3 +4,11 @@ footer {
     padding: 1em;
     font-size: 1.3em;
 }
+
+footer a {
+    font-weight: bold;
+}
+
+footer a:hover {
+    cursor: pointer;
+}
