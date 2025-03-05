@@ -42,9 +42,16 @@ button.addEventListener('click', () => {
  * 
  * @async
  * @function fetchData
- * @throws {Error} Om API-anropet misslyckas eller om data inte går att bearbeta
  */
 async function fetchData() {
+    // Kontrollera om vi är på en sida där diagrammen finns
+    const barChartElement = document.getElementById('barChart');
+    const pieChartElement = document.getElementById('pieChart');
+
+    if (!barChartElement && !pieChartElement) {
+        return; // Avsluta om vi inte är på en sida som behöver diagrammen
+    }
+
     try {
         const response = await fetch("https://studenter.miun.se/~mallar/dt211g/");
         const data = await response.json();
@@ -62,14 +69,15 @@ async function fetchData() {
             .sort((a, b) => b.applicantsTotal - a.applicantsTotal)
             .slice(0, 6);
 
-        createBarChart(topCourses);
-
         // Hämta de 5 mest sökta programmen
         const topPrograms = programs
             .sort((a, b) => b.applicantsTotal - a.applicantsTotal)
             .slice(0, 5);
 
-        createPieChart(topPrograms);
+        // Skapa diagrammen endast om elementen finns
+        if (barChartElement) createBarChart(topCourses);
+        if (pieChartElement) createPieChart(topPrograms);
+
     } catch (error) {
         console.error("Fel vid hämtning av data:", error);
     }
@@ -83,6 +91,8 @@ async function fetchData() {
  */
 function createBarChart(topCourses) {
     const ctx = document.getElementById('barChart');
+
+    if (!ctx) return; // Undvik fel om elementet saknas
 
     new Chart(ctx, {
         type: "bar",
@@ -111,6 +121,8 @@ function createBarChart(topCourses) {
 function createPieChart(topPrograms) {
     const ctx = document.getElementById('pieChart');
 
+    if (!ctx) return; // Undvik fel om elementet saknas
+
     new Chart(ctx, {
         type: "pie",
         options: { responsive: true },
@@ -124,14 +136,20 @@ function createPieChart(topPrograms) {
     });
 }
 
-// Anropa fetchData när sidan laddats
-window.onload = fetchData;
+// Kör endast fetchData om vi är på en relevant sida
+if (document.getElementById('barChart') || document.getElementById('pieChart')) {
+    window.onload = fetchData;
+}
 
 // KARTA
 document.addEventListener("DOMContentLoaded", () => {
     const searchButton = document.getElementById("searchLocation");
     const locationInput = document.getElementById("locationInput");
     const mapFrame = document.getElementById("mapFrame");
+
+    if (!searchButton || !locationInput || !mapFrame) {
+        return; // Avsluta om vi inte är på kart-sidan
+    }
 
     /**
      * Hämtar koordinater för en angiven plats och uppdaterar kartan.
